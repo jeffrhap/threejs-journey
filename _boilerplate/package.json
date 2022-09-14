@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "engines": {
+    "node": "^16.13.0"
+  },
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@sentry/tracing": "^6.17.4",
+    "@sentry/vue": "^6.17.4",
+    "axios": "^0.25.0",
+    "core-js": "^3.6.5",
+    "gsap": "^3.11.1",
+    "lil-gui": "^0.17.0",
+    "pinia": "^2.0.14",
+    "three": "^0.142.0",
+    "vue": "^3.0.0",
+    "vue-axios": "^3.4.0",
+    "vue-gtm": "^3.5.0",
+    "vue-i18n": "^9.2.0-beta.30",
+    "vue-router": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.141.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "sass": "^1.52.2",
+    "sass-loader": "^8.0.2",
+    "typescript": "~4.7.3"
+  }
+}

@@ -1,0 +1,26 @@
+// @import (Google font urls here) //
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&family=Raleway&display=swap');
+
+html, body, #app {
+	font-family: serif;
+	line-height: 1.5;
+}
+
+h1 {
+	font-family: 'Barlow';
+	font-size: 80px;
+	color: black;
+	line-height: 1.1;
+
+	@include mobile {
+		font-size: 32px;
+	}
+}
+
+h2 {
+	font-family: 'Raleway';
+}
+
+p {
+	font-size: 16px;
+}
