@@ -55,10 +55,23 @@ const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture });
 // Pole light material
 const poleLightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffe5 });
 
+debugObject.portalColorStart = "#7e068e";
+debugObject.portalColorEnd = "#f4a8f5";
+
+gui.addColor(debugObject, "portalColorStart").onChange(() => {
+  portalLightMaterial.uniforms.uColorStart.value.set(debugObject.portalColorStart);
+});
+
+gui.addColor(debugObject, "portalColorEnd").onChange(() => {
+  portalLightMaterial.uniforms.uColorEnd.value.set(debugObject.portalColorEnd);
+});
+
 // Portal light material
 const portalLightMaterial = new THREE.ShaderMaterial({
   uniforms: {
     uTime: { value: 0 },
+    uColorStart: { value: new THREE.Color(debugObject.portalColorStart) },
+    uColorEnd: { value: new THREE.Color(debugObject.portalColorEnd) },
   },
   vertexShader: portalVertexShader,
   fragmentShader: portalFragmentShader,
@@ -160,6 +173,13 @@ scene.add(camera);
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
+// controls.enablePan = false;
+controls.maxAzimuthAngle = Math.PI / 2 + 0.25;
+controls.minAzimuthAngle = -Math.PI / 2 - 0.25;
+controls.maxPolarAngle = Math.PI / 2 - 0.25;
+
+const minPan = new THREE.Vector3(-0.8, -0.8, -0.8);
+const maxPan = new THREE.Vector3(0.8, 0.8, 0.8);
 
 /**
  * Renderer
@@ -192,6 +212,8 @@ const tick = () => {
 
   // Update controls
   controls.update();
+
+  controls.target.clamp(minPan, maxPan);
 
   // Render
   renderer.render(scene, camera);
