@@ -1,5 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import {
+  Lightformer,
+  Environment,
   Sky,
   ContactShadows,
   RandomizedLight,
@@ -35,8 +37,21 @@ export default function Experience() {
     sunPosition: { value: [1, 2, 3] },
   });
 
+  const { envMapIntensity } = useControls("environment map", {
+    envMapIntensity: { value: 3.5, min: 0, max: 12 },
+  });
+
   return (
     <>
+      <Environment background preset="sunset">
+        {/* <color args={["#000000"]} attach="background" />
+        <Lightformer position-z={-5} scale={10} color="red" intensity={10} form="ring" /> */}
+        {/* <mesh position-z={-5} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color={[10, 0, 0]} />
+        </mesh> */}
+      </Environment>
+
       {/* <BakeShadows /> */}
       {/* <SoftShadows size={5} samples={17} /> */}
       <Perf position="top-left" />
@@ -58,30 +73,36 @@ export default function Experience() {
         frames={1}
       />
 
-      <directionalLight
+      {/* <directionalLight
         ref={directionalLight}
         position={sunPosition}
         intensity={1.5}
         castShadow
         shadow-mapSize={[1024, 1024]}
+        shadow-camera-near={1}
+        shadow-camera-far={10}
+        shadow-camera-top={5}
+        shadow-camera-right={5}
+        shadow-camera-bottom={-5}
+        shadow-camera-left={-5}
       />
       <ambientLight intensity={0.5} />
 
-      <Sky sunPosition={sunPosition} />
+      <Sky sunPosition={sunPosition} /> */}
 
       <mesh castShadow position-x={-2}>
         <sphereGeometry />
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity} />
       </mesh>
 
       <mesh castShadow ref={cube} position-x={2} scale={1.5}>
         <boxGeometry />
-        <meshStandardMaterial color="mediumpurple" />
+        <meshStandardMaterial color="mediumpurple" envMapIntensity={envMapIntensity} />
       </mesh>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
-        <meshStandardMaterial color="greenyellow" />
+        <meshStandardMaterial color="greenyellow" envMapIntensity={envMapIntensity} />
       </mesh>
     </>
   );
